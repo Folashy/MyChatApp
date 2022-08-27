@@ -64,13 +64,14 @@ Based on all the features we've planned out for our project
 
 ### **Routes** 
 - **User CRUDE / ROUTES** (copy, paste, cut, delete, rename, star, pin)
-  - *sign up user: `POST` `http://localhost:5000/users/signup` 
-  - *get all users*: `GET` `http://localhost:5000/users/api`
-  - *get single user*: `GET` `http://localhost:5000/users/api/id`
-  - *update user*: `PATCH` `http://localhost:5000/users/api/id`
-  - *login user*: `POST` `http://localhost:5000/users/login`
-  - *logout*: `POST` `http://localhost:5000/users/logout`
+  - *sign up user: `POST` `http://localhost:5000/otimkpu/signup` 
+  - *get all users*: `GET` `http://localhost:5000/otimkpu/api/`
+  - *get single user*: `GET` `http://localhost:5000/otimkpu/api/id`
+  - *update user*: `PATCH` `http://localhost:5000/otimkpu/api/id`
+  - *login user*: `POST` `http://localhost:5000/otimkpu/login`
+  - *logout*: `POST` `http://localhost:5000/otimkpu/logout`
   - *index route*: `GET` `http://localhost:5000`
 
+REST API
 
-
+read
