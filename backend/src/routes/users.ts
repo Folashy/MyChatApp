@@ -1,4 +1,4 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
 
 import {
@@ -12,7 +12,10 @@ import {
 } from '../controller/user.js'
 
 /* GET users listing. */
-router.post('/signup', signupUser);
+router.get('/about', (req,res)=>{
+  res.send("about")
+})
+router.post('/signup',signupUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.get("/api", getUsers);

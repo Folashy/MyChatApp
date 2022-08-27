@@ -1,5 +1,5 @@
 # NODE-SQ011B-MINI-PROJECT-
-## PROJECT NAME – CHAT APPLICATION FOR DECADEVS  
+## PROJECT NAME – CHAT APPLICATION FOR DECADEVS  code Otimkpu (town cryier in Ibo language)
 
 ### **Overview**
 We are aware of the rate at which Decagon community is growing, We currently have more than 600 Decadevs, Decagons vision is to train over 5000 world class software engineers in the next few years hence we decided to build a chat application for seamless networking for all Decadevs. 

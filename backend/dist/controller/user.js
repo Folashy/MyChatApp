@@ -5,17 +5,55 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.getSingleUser = exports.getUsers = exports.logoutUser = exports.loginUser = exports.signupUser = void 0;
 const express_1 = __importDefault(require("express"));
+const uuid_1 = require("uuid");
+const user_1 = require("../models/user");
+const utils_1 = require("../utils/utils");
 var router = express_1.default.Router();
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 /* GET users listing. */
-function signupUser(req, res, next) {
-    res.json({
-        msg: "sign up user route"
-    });
+async function signupUser(req, res, next) {
+    const id = (0, uuid_1.v4)();
+    try {
+        const validationResult = utils_1.registerSchema.validate(req.body, utils_1.options);
+        const duplicatEmail = await user_1.UserInstance.findOne({ where: { email: req.body.email } });
+        if (duplicatEmail) {
+            return res.status(409).json({
+                msg: "Email is used, please change email"
+            });
+        }
+        const username = await user_1.UserInstance.findOne({ where: { username: req.body.username } });
+        if (username) {
+            return res.status(409).json({
+                msg: "username  is used"
+            });
+        }
+        const passwordHash = await bcryptjs_1.default.hash(req.body.password, 8);
+        const record = await user_1.UserInstance.create({
+            id: id,
+            username: req.body.username,
+            fullname: req.body.fullname,
+            email: req.body.email,
+            password: passwordHash,
+            phone: req.body.phone,
+            gender: req.body.gender
+        });
+        res.status(201).json({
+            msg: "You have successfully created a user",
+            record
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            msg: 'failed to register',
+            route: '/register'
+        });
+    }
 }
 exports.signupUser = signupUser;
 ;
 /* GET users listing. */
-function loginUser(req, res, next) {
+async function loginUser(req, res, next) {
     res.json({
         msg: "login user route"
     });
@@ -23,7 +61,7 @@ function loginUser(req, res, next) {
 exports.loginUser = loginUser;
 ;
 /* GET users listing. */
-function logoutUser(req, res, next) {
+async function logoutUser(req, res, next) {
     res.json({
         msg: "logout user route"
     });
@@ -31,7 +69,7 @@ function logoutUser(req, res, next) {
 exports.logoutUser = logoutUser;
 ;
 /* GET ALL USERS users listing. */
-function getUsers(req, res, next) {
+async function getUsers(req, res, next) {
     res.json({
         msg: "get all users route"
     });
@@ -39,7 +77,7 @@ function getUsers(req, res, next) {
 exports.getUsers = getUsers;
 ;
 /* GET SINGLE users listing. */
-function getSingleUser(req, res, next) {
+async function getSingleUser(req, res, next) {
     res.json({
         msg: "get single user route"
     });
@@ -47,7 +85,7 @@ function getSingleUser(req, res, next) {
 exports.getSingleUser = getSingleUser;
 ;
 /* UPDATE users listing. */
-function updateUser(req, res, next) {
+async function updateUser(req, res, next) {
     res.json({
         msg: "update user route"
     });
@@ -55,7 +93,7 @@ function updateUser(req, res, next) {
 exports.updateUser = updateUser;
 ;
 /* DELETE users listing. */
-function deleteUser(req, res, next) {
+async function deleteUser(req, res, next) {
     res.json({
         msg: "delete user route"
     });
