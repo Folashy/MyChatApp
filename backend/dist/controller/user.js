@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.getSingleUser = exports.getUsers = exports.logoutUser = exports.loginUser = exports.signupUser = void 0;
+exports.follow = exports.deleteUser = exports.updateUser = exports.getSingleUser = exports.getUsers = exports.logoutUser = exports.loginUser = exports.signupUser = void 0;
 const express_1 = __importDefault(require("express"));
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
@@ -34,6 +34,13 @@ async function signupUser(req, res, next) {
             fullname: req.body.fullname,
             email: req.body.email,
             password: passwordHash,
+            profilePicture: req.body.profilePicture,
+            coverPicture: req.body.coverPicture,
+            isAdmin: false,
+            desc: req.body.desc,
+            city: req.body.city,
+            from: req.body.from,
+            relationship: req.body.relationship,
             phone: req.body.phone,
             gender: req.body.gender
         });
@@ -99,4 +106,12 @@ async function deleteUser(req, res, next) {
     });
 }
 exports.deleteUser = deleteUser;
+;
+//follow a user
+async function follow(req, res, next) {
+    res.json({
+        msg: "delete user route"
+    });
+}
+exports.follow = follow;
 ;
