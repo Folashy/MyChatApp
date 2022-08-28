@@ -42,3 +42,12 @@ export const options ={
         }
     }
 } 
+
+export const updateSchema = Joi.object().keys({
+    username:Joi.string().lowercase(),
+    fullname:Joi.string().lowercase(),
+    email:Joi.string(),
+    phone:Joi.string(),
+    password:Joi.string()
+    
+});

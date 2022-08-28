@@ -93,12 +93,39 @@ exports.getSingleUser = getSingleUser;
 ;
 /* UPDATE users listing. */
 async function updateUser(req, res, next) {
-    res.json({
-        msg: "update user route"
-    });
+    try {
+        const { id } = req.params;
+        const { username, fullname, email, password, phone, gender } = req.body;
+        const validationResult = utils_1.updateSchema.validate(req.body, utils_1.options);
+        if (validationResult.error) {
+            return res.status(400).json({ Error: validationResult.error.details[0].message });
+        }
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        if (!record) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        const updateRecord = await record.update({
+            id,
+            username,
+            fullname,
+            email,
+            password,
+            phone,
+            gender
+        });
+        res.status(200).json({
+            msg: "you have successfully updated your account"
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: "failed to update",
+            route: "/users/api/:id",
+        });
+    }
 }
 exports.updateUser = updateUser;
-;
 /* DELETE users listing. */
 async function deleteUser(req, res, next) {
     res.json({
