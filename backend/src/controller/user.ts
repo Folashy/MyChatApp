@@ -4,6 +4,7 @@ import { UserInstance } from '../models/user';
 import { registerSchema,options,loginSchema,generateToken} from '../utils/utils';
 var router = express.Router();
 import bcrypt from 'bcryptjs'
+import { ValidationError } from 'sequelize/types';
 
 /* GET users listing. */
 export async function signupUser (req: Request, res: Response, next: NextFunction) {
@@ -11,6 +12,11 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
     const id = uuidv4()
     try{ 
         const validationResult = registerSchema.validate(req.body,options)
+        if(validationResult.error){
+            return res.status(400).json({
+                Error:validationResult.error.details[0].message
+            })
+        }
         const duplicatEmail = await UserInstance.findOne({where:{email:req.body.email}})
         if(duplicatEmail){
          return res.status(409).json({
@@ -48,7 +54,7 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
        res.status(500).json({
         
         msg:'failed to register',
-        route:'/register' 
+        route:'/signup' 
        })
     }
  
@@ -72,7 +78,7 @@ export async function logoutUser (req: Request, res: Response, next: NextFunctio
         })
         res.redirect('/users/logout')
     }
-};
+}
 
 /* GET ALL USERS users listing. */
 export async function getUsers (req: Request, res: Response, next: NextFunction) {

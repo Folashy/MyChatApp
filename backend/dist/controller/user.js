@@ -15,6 +15,11 @@ async function signupUser(req, res, next) {
     const id = (0, uuid_1.v4)();
     try {
         const validationResult = utils_1.registerSchema.validate(req.body, utils_1.options);
+        if (validationResult.error) {
+            return res.status(400).json({
+                Error: validationResult.error.details[0].message
+            });
+        }
         const duplicatEmail = await user_1.UserInstance.findOne({ where: { email: req.body.email } });
         if (duplicatEmail) {
             return res.status(409).json({
@@ -46,7 +51,7 @@ async function signupUser(req, res, next) {
         console.log(err);
         res.status(500).json({
             msg: 'failed to register',
-            route: '/register'
+            route: '/signup'
         });
     }
 }
@@ -71,7 +76,6 @@ async function logoutUser(req, res, next) {
     }
 }
 exports.logoutUser = logoutUser;
-;
 /* GET ALL USERS users listing. */
 async function getUsers(req, res, next) {
     res.json({
