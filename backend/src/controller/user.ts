@@ -65,9 +65,13 @@ export async function loginUser (req: Request, res: Response, next: NextFunction
 
 /* GET users listing. */
 export async function logoutUser (req: Request, res: Response, next: NextFunction) {
-    res.json({
-        msg: "logout user route"
-    });
+    if(req.cookies.token){
+        res.cookie('token', '', {
+            httpOnly:true,
+            maxAge:1
+        })
+        res.redirect('/users/logout')
+    }
 };
 
 /* GET ALL USERS users listing. */

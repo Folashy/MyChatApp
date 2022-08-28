@@ -62,9 +62,13 @@ exports.loginUser = loginUser;
 ;
 /* GET users listing. */
 async function logoutUser(req, res, next) {
-    res.json({
-        msg: "logout user route"
-    });
+    if (req.cookies.token) {
+        res.cookie('token', '', {
+            httpOnly: true,
+            maxAge: 1
+        });
+        res.redirect('/users/logout');
+    }
 }
 exports.logoutUser = logoutUser;
 ;
