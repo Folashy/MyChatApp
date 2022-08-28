@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import db from '../config/db.config'
+import {PostInstance} from './post'
 
 interface UsersAttributes {
     id: string;
@@ -7,8 +8,15 @@ interface UsersAttributes {
     fullname:string;
     email:string;
     password:string;
+    profilePicture:string;
+    coverPicture: string;
+    isAdmin: boolean;
+    desc:string;
+    city:string;
+    from:string;
+    relationship:string;
     phone:string;
-    gender:string
+    gender:string;
 }
 
 export  class UserInstance extends Model<UsersAttributes>{}
@@ -22,6 +30,7 @@ UserInstance.init({
     username:{
         type:DataTypes.STRING,
         allowNull:false,
+        unique:true,
         validate:{
             notNull:{
                 msg:'username is required'
@@ -59,7 +68,6 @@ UserInstance.init({
     password:{
         type:DataTypes.STRING,
         allowNull:false,
-        unique:true,
         validate:{
             notNull:{
                 msg:'password is required'
@@ -69,24 +77,67 @@ UserInstance.init({
             }
         }
     },
+    profilePicture:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        defaultValue:""
+    },
+    coverPicture:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        defaultValue:""
+    },
+    isAdmin:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    },
+    desc:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        defaultValue:""
+        
+    },
+    city:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        defaultValue:""
+    },
+    from:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        defaultValue:""
+    },
+    relationship:{
+        type:DataTypes.STRING,
+        allowNull:false,
+        defaultValue:""
+    },
     phone:{
         type:DataTypes.STRING,
         allowNull:false,
-        validate:{
-            notNull:{
-                msg:'phone is required'
-            },
-            notEmpty:{
-                msg:"please provide a phone"
-            }
-        }
+        defaultValue:""
     },
     gender:{
-        type:DataTypes.STRING,
-        allowNull:false
+        type:DataTypes.STRING,  
+        allowNull:false,
+        
+        
     },
 },{
     sequelize:db,
     tableName:'user'
 });
 
+UserInstance.hasMany(PostInstance, {foreignKey:'UserId',
+as:'post'
+})
+
+PostInstance.belongsTo(UserInstance,{foreignKey:'UserId',
+as:'user'}) 
+
+// UserInstance.hasMany(PostInstance, {foreignKey:'UserId',
+// as:'post'
+// })
+
+// PostInstance.belongsTo(UserInstance,{foreignKey:'UserId',
+// as:'user'}) 

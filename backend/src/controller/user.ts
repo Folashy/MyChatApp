@@ -33,6 +33,13 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
           fullname:req.body.fullname,
           email:req.body.email,
           password:passwordHash,
+          profilePicture:req.body.profilePicture,
+          coverPicture:req.body.coverPicture ,
+          isAdmin: false,
+          desc:req.body.desc,
+          city:req.body.city,
+          from:req.body.from,
+          relationship:req.body.relationship,
           phone:req.body.phone,
           gender:req.body.gender
 
@@ -122,6 +129,13 @@ export async function updateUser (req: Request, res: Response, next: NextFunctio
 
 /* DELETE users listing. */
 export async function deleteUser (req: Request, res: Response, next: NextFunction) {
+    res.json({
+        msg: "delete user route"
+    });
+};
+
+//follow a user
+export async function follow (req: Request, res: Response, next: NextFunction) {
     res.json({
         msg: "delete user route"
     });
