@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.options = exports.generateToken = exports.loginSchema = exports.registerSchema = void 0;
+exports.updateSchema = exports.options = exports.generateToken = exports.loginSchema = exports.registerSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.registerSchema = joi_1.default.object().keys({
@@ -32,3 +32,10 @@ exports.options = {
         }
     }
 };
+exports.updateSchema = joi_1.default.object().keys({
+    username: joi_1.default.string().lowercase(),
+    fullname: joi_1.default.string().lowercase(),
+    email: joi_1.default.string(),
+    phone: joi_1.default.string(),
+    password: joi_1.default.string()
+});
