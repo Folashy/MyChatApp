@@ -28,7 +28,7 @@ To be detailed after approval
 5. Create a new branch for the user story you're working on eg : `git checkout -b login-page`
 6. After making changes, do `git add .`
 7. Commit your changes with a descriptive commit message : `git commit -m "your commit message"`.
-8. To make sure there are no conflicts : `git pull upstream develop`
+8. To update your local `develop` with the one on github, Run `git pull`
 9. Push changes to your new branch : `git push origin login page`
 10. Create a pull request to the `develop` branch.
 
