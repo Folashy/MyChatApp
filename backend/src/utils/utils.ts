@@ -8,7 +8,7 @@ export const registerSchema = Joi.object().keys({
     username:Joi.string().required(),
     fullname:Joi.string().required(),
     email:Joi.string().trim().lowercase().required(),
-    password:Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+    password:Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
     confirm_password:Joi.ref("password"),
     phone:Joi.string().required()
 
