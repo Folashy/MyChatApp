@@ -19,9 +19,15 @@ router.post('/signup',signupUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.get("/api", getUsers);
+<<<<<<< HEAD
 router.get("/api/:id", getSingleUser);
 router.patch("/api/:id", updateUser);
 router.delete("/api/:id", deleteUser);
+=======
+router.get("/api/id", getSingleUser);
+router.patch("/api/:id", updateUser);
+router.delete("/api/id", deleteUser);
+>>>>>>> develop
 
 export default router;
 

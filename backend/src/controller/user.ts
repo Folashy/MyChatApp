@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction} from 'express';
 import {v4 as uuidv4} from 'uuid'
 import { UserInstance } from '../models/user';
-import { registerSchema,options,loginSchema,generateToken} from '../utils/utils';
+import { registerSchema,options,loginSchema,generateToken, updateSchema} from '../utils/utils';
 var router = express.Router();
 import bcrypt from 'bcryptjs'
 
@@ -28,6 +28,7 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
         
        const passwordHash = await bcrypt.hash(req.body.password,8)
        const record = await UserInstance.create({ 
+<<<<<<< HEAD
            id: id,
            username: req.body.username,
            fullname: req.body.fullname,
@@ -43,6 +44,22 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
            phone: req.body.phone,
            gender: req.body.gender, 
           
+=======
+          id:id,
+          username:req.body.username,
+          fullname:req.body.fullname,
+          email:req.body.email,
+          password:passwordHash,
+          profilePicture:req.body.profilePicture,
+          coverPicture:req.body.coverPicture ,
+          isAdmin: false,
+          desc:req.body.desc,
+          city:req.body.city,
+          from:req.body.from,
+          relationship:req.body.relationship,
+          phone:req.body.phone,
+          gender:req.body.gender
+>>>>>>> develop
 
         })
         
@@ -145,10 +162,39 @@ export async function getSingleUser(req: Request, res: Response, next: NextFunct
 
 /* UPDATE users listing. */
 export async function updateUser (req: Request, res: Response, next: NextFunction) {
-    res.json({
-        msg: "update user route"
-    });
-};
+    try{
+        const {id} = req.params;
+        const {username, fullname, email, password, phone, gender} = req.body;
+        const validationResult = updateSchema.validate(req.body, options);
+        if (validationResult.error){
+            return res.status(400).json({Error: validationResult.error.details[0].message});
+        }
+        const record = await UserInstance.findOne({where: {id}});
+        if(!record){
+            return res.status(404).json({error: "User not found"})
+        }
+        const updateRecord = await record.update({
+            
+            id, 
+            username,
+            fullname,
+            email,
+            password,
+            phone,
+            gender
+        });
+        res.status(200).json({
+            msg: "you have successfully updated your account"
+        });
+    }
+     catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg: "failed to update",
+            route: "/users/api/:id",
+        })
+     }
+}
 
 /* DELETE users listing. */
 export async function deleteUser(req: Request, res: Response, next: NextFunction) {
@@ -171,6 +217,13 @@ export async function deleteUser(req: Request, res: Response, next: NextFunction
             route: "/delete/:id"
         })
     }
+};
+
+//follow a user
+export async function follow (req: Request, res: Response, next: NextFunction) {
+    res.json({
+        msg: "delete user route"
+    });
 };
 
 
