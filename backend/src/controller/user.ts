@@ -95,7 +95,7 @@ export async function getSingleUser (req: Request, res: Response, next: NextFunc
 export async function updateUser (req: Request, res: Response, next: NextFunction) {
     try{
         const {id} = req.params;
-        const {username, fullname, email, password, phone, gender} = req.body;
+        const {username, fullname, email, password, profilePicture, phone, gender} = req.body;
         const validationResult = updateSchema.validate(req.body, options);
         if (validationResult.error){
             return res.status(400).json({Error: validationResult.error.details[0].message});
@@ -111,8 +111,10 @@ export async function updateUser (req: Request, res: Response, next: NextFunctio
             fullname,
             email,
             password,
+            profilePicture,
             phone,
-            gender
+            gender,
+            
         });
         res.status(200).json({
             msg: "you have successfully updated your account"
