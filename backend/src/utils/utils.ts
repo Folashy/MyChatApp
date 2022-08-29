@@ -33,6 +33,10 @@ export const loginSchema = Joi.object().keys({
   
 })
 
+export const postSchema = Joi.object().keys({
+    img:Joi.string(),
+    desc:Joi.string()
+})
 //Generate Token
 export const generateToken=(user:{[key:string]:unknown}):unknown=>{
   const pass = `${process.env.JWT_SECRET}` as string

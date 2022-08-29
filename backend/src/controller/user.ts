@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction} from 'express';
 import {v4 as uuidv4} from 'uuid'
 import { UserInstance } from '../models/user';
-import { registerSchema,options,loginSchema,generateToken, updateSchema} from '../utils/utils';
+import { registerSchema,options,loginSchema,generateToken} from '../utils/utils';
 var router = express.Router();
 import bcrypt from 'bcryptjs'
 import { ValidationError } from 'sequelize/types';
@@ -11,17 +11,15 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
 
     const id = uuidv4()
     try{ 
-<<<<<<< HEAD
+
         const validationResult = registerSchema.validate(req.body,options)
+
         if(validationResult.error){
             return res.status(400).json({
                 Error:validationResult.error.details[0].message
             })
         }
-=======
-        const validationResult = registerSchema.validate(req.body, options)
-        
->>>>>>> develop
+
         const duplicatEmail = await UserInstance.findOne({where:{email:req.body.email}})
         if(duplicatEmail){
          return res.status(409).json({
@@ -38,23 +36,8 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
         
        const passwordHash = await bcrypt.hash(req.body.password,8)
        const record = await UserInstance.create({ 
-<<<<<<< HEAD
-           id: id,
-           username: req.body.username,
-           fullname: req.body.fullname,
-           email: req.body.email,
-           password: passwordHash,
-           profilePicture:req.body.profilePicture,
-           coverPicture:req.body.coverPicture,
-           isAdmin:req.body.isAdmin,
-           desc:req.body.desc,
-           city: req.body.city,
-           from: req.body.from,
-           relationship: req.body.relationship,
-           phone: req.body.phone,
-           gender: req.body.gender, 
-          
-=======
+
+
           id:id,
           username:req.body.username,
           fullname:req.body.fullname,
@@ -69,7 +52,7 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
           relationship:req.body.relationship,
           phone:req.body.phone,
           gender:req.body.gender
->>>>>>> develop
+
 
         })
         
@@ -176,6 +159,12 @@ export async function getSingleUser(req: Request, res: Response, next: NextFunct
 
 /* UPDATE users listing. */
 export async function updateUser (req: Request, res: Response, next: NextFunction) {
+<<<<<<< HEAD
+    res.json({
+        msg: "update user route"
+    });
+};
+=======
     try{
         const {id} = req.params;
         const {username, fullname, email, password, profilePicture, phone, gender} = req.body;
@@ -211,6 +200,7 @@ export async function updateUser (req: Request, res: Response, next: NextFunctio
         })
      }
 }
+>>>>>>> develop
 
 /* DELETE users listing. */
 export async function deleteUser(req: Request, res: Response, next: NextFunction) {
@@ -243,3 +233,9 @@ export async function follow (req: Request, res: Response, next: NextFunction) {
 };
 
 
+//unfollow a user
+export async function unfollow (req: Request, res: Response, next: NextFunction) {
+    res.json({
+        msg: "delete user route"
+    });
+};
