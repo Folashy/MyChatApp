@@ -10,8 +10,8 @@ We are aware of the rate at which Decagon community is growing, We currently hav
 2. Clone this repo using `git clone git@github.com:decadevs/week-8-mini-project-group_6.git`
 3. Change directory into the new clone `cd git@github.com:decadevs/week-8-mini-project-group_6.git`
 3. Change directory into server `cd backend`
-3. Change directory into client `cd client`
-4. Run setup script to install all packages using `yarn install`
+3. Change directory into frontend `cd frontend`
+4. Run setup script to install all packages using `yarn`
 5. Run build script to get bundled react file `npm run build`
 6. Now run server in development mode with `npm run dev`
 
@@ -28,8 +28,8 @@ To be detailed after approval
 5. Create a new branch for the user story you're working on eg : `git checkout -b login-page`
 6. After making changes, do `git add .`
 7. Commit your changes with a descriptive commit message : `git commit -m "your commit message"`.
-8. To make sure there are no conflicts : `git pull upstream develop`
-9. Push changes to your new branch : `git push origin login page`
+8. To update your local `develop` with the one on github, Run `git pull`
+9. Push changes to your new branch : `git push origin login-page`
 10. Create a pull request to the `develop` branch.
 
 
@@ -38,15 +38,15 @@ For the BackEnd of this project, all you truly need to worry about is the `backe
 
 ```  
 
-    ├── client
+    ├── frontend
     ├── server
     ├── socket
 
 ```
 
-We are using MVC framework, all `frontend` will be in `client` forder while all `backend` logic will be in `server` folder and `socket` in `socket` folder.
+We are using MVC framework, all `frontend` will be in `frontend` forder while all `backend` logic will be in `server` folder and `socket` in `socket` folder.
 
-Run `cd client` to navigate to `client` folder 
+Run `cd frontend` to navigate to `frontend` folder 
 Run `cd backend` to navigate to `backend` folder 
 Run `cd socket` to navigate to `socket` folder 
 
@@ -57,7 +57,7 @@ Make sure you are in root directory before pushing to github.
 2. Clone this repo using `git clone git@github.com:decadevs/week-8-mini-project-group_6.git`
 3. Change directory into the new clone `cd git@github.com:decadevs/week-8-mini-project-group_6.git`
 3. Change directory into server `cd backend`
-3. Change directory into client `cd client`
+3. Change directory into frontend `cd frontend`
 4. Run setup script to install all packages using `yarn install`
 5. Run build script to get bundled react file `npm run build`
 6. Now run server in development mode with `npm run dev`

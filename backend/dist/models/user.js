@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserInstance = void 0;
 const sequelize_1 = require("sequelize");
 const db_config_1 = __importDefault(require("../config/db.config"));
+const post_1 = require("./post");
 class UserInstance extends sequelize_1.Model {
 }
 exports.UserInstance = UserInstance;
@@ -52,10 +53,37 @@ UserInstance.init({
             }
         }
     },
+    profilePicture: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    coverPicture: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    desc: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    city: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    from: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    relationship: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
     password: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
             notNull: {
                 msg: 'password is required'
@@ -65,23 +93,60 @@ UserInstance.init({
             }
         }
     },
+    profilePicture: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ""
+    },
+    coverPicture: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ""
+    },
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    desc: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ""
+    },
+    city: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ""
+    },
+    from: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ""
+    },
+    relationship: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ""
+    },
     phone: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        validate: {
-            notNull: {
-                msg: 'phone is required'
-            },
-            notEmpty: {
-                msg: "please provide a phone"
-            }
-        }
+        defaultValue: ""
     },
     gender: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
 }, {
     sequelize: db_config_1.default,
     tableName: 'user'
 });
+UserInstance.hasMany(post_1.PostInstance, { foreignKey: 'UserId',
+    as: 'post'
+});
+post_1.PostInstance.belongsTo(UserInstance, { foreignKey: 'UserId',
+    as: 'user' });
+// UserInstance.hasMany(PostInstance, {foreignKey:'UserId',
+// as:'post'
+// })
+// PostInstance.belongsTo(UserInstance,{foreignKey:'UserId',
+// as:'user'}) 
