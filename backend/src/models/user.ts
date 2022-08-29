@@ -7,6 +7,16 @@ interface UsersAttributes {
     username:string;
     fullname:string;
     email:string;
+<<<<<<< HEAD
+    password: string;
+    profilePicture: string;
+    coverPicture: string;
+    isAdmin: boolean;
+    desc: string;
+    city: string;
+    from: string;
+    relationship: string;
+=======
     password:string;
     profilePicture:string;
     coverPicture: string;
@@ -15,6 +25,7 @@ interface UsersAttributes {
     city:string;
     from:string;
     relationship:string;
+>>>>>>> develop
     phone:string;
     gender:string;
 }
@@ -22,11 +33,19 @@ interface UsersAttributes {
 export  class UserInstance extends Model<UsersAttributes>{}
 
 UserInstance.init({
-    id:{
-        type:DataTypes.UUIDV4,
-        primaryKey:true,
-        allowNull:false
+    id: {
+        type: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false
     },
+<<<<<<< HEAD
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: 'username is required'
+=======
     username:{
         type:DataTypes.STRING,
         allowNull:false,
@@ -34,38 +53,67 @@ UserInstance.init({
         validate:{
             notNull:{
                 msg:'username is required'
+>>>>>>> develop
             },
-            notEmpty:{
-                msg:"please provide a username"
+            notEmpty: {
+                msg: "please provide a username"
             }
         }
     },
-    fullname:{
-        type:DataTypes.STRING,
-        allowNull:false,
-        validate:{
-            notNull:{
-                msg:'fullname is required'
+    fullname: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: 'fullname is required'
             },
-            notEmpty:{
-                msg:"please provide a fullname"
+            notEmpty: {
+                msg: "please provide a fullname"
             }
         }
     },
-    email:{
-        type:DataTypes.STRING,
-        allowNull:false,
-        unique:true,
-        validate:{
-            notNull:{
-                msg:'email is required'
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            notNull: {
+                msg: 'email is required'
             },
-            isEmail:{
-                msg:'please provide a valid Email'
+            isEmail: {
+                msg: 'please provide a valid Email'
             }
         }
     },
-    password:{
+    profilePicture: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    coverPicture: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    desc: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    city: {
+        type: DataTypes.STRING,
+        allowNull: false 
+    },
+    from: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    relationship: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    password: {
         type:DataTypes.STRING,
         allowNull:false,
         validate:{
