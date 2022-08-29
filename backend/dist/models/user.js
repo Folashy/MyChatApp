@@ -19,7 +19,6 @@ UserInstance.init({
     username: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
             notNull: {
                 msg: 'username is required'
@@ -53,6 +52,34 @@ UserInstance.init({
                 msg: 'please provide a valid Email'
             }
         }
+    },
+    profilePicture: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    coverPicture: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    desc: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    city: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    from: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    relationship: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     password: {
         type: sequelize_1.DataTypes.STRING,
