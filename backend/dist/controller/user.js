@@ -34,8 +34,15 @@ async function signupUser(req, res, next) {
             fullname: req.body.fullname,
             email: req.body.email,
             password: passwordHash,
+            profilePicture: req.body.profilePicture,
+            coverPicture: req.body.coverPicture,
+            isAdmin: req.body.isAdmin,
+            desc: req.body.desc,
+            city: req.body.city,
+            from: req.body.from,
+            relationship: req.body.relationship,
             phone: req.body.phone,
-            gender: req.body.gender
+            gender: req.body.gender,
         });
         res.status(201).json({
             msg: "You have successfully created a user",

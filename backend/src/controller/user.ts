@@ -20,7 +20,6 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
         }
 
         const username = await UserInstance.findOne({where:{username:req.body.username}})
-
         if(username){
          return res.status(409).json({
             msg:"username  is used"
@@ -29,13 +28,21 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
         
        const passwordHash = await bcrypt.hash(req.body.password,8)
        const record = await UserInstance.create({ 
-          id:id,
-          username:req.body.username,
-          fullname:req.body.fullname,
-          email:req.body.email,
-          password:passwordHash,
-          phone:req.body.phone,
-          gender:req.body.gender
+           id: id,
+           username: req.body.username,
+           fullname: req.body.fullname,
+           email: req.body.email,
+           password: passwordHash,
+           profilePicture:req.body.profilePicture,
+           coverPicture:req.body.coverPicture,
+           isAdmin:req.body.isAdmin,
+           desc:req.body.desc,
+           city: req.body.city,
+           from: req.body.from,
+           relationship: req.body.relationship,
+           phone: req.body.phone,
+           gender: req.body.gender, 
+          
 
         })
         
