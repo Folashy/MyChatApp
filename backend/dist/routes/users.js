@@ -10,20 +10,11 @@ const user_js_1 = require("../controller/user.js");
 router.get('/about', (req, res) => {
     res.send("about");
 });
+router.post('/signup', user_js_1.signupUser);
+router.post("/login", user_js_1.loginUser);
+router.post("/logout", user_js_1.logoutUser);
 router.get("/api", user_js_1.getUsers);
-router.get("/api/id", user_js_1.getSingleUser);
+router.get("/api/:id", user_js_1.getSingleUser);
 router.patch("/api/:id", user_js_1.updateUser);
-router.delete("/api/id", user_js_1.deleteUser);
-//get friends
-router.get('/friends/:id', (req, res) => {
-    res.send("get all frends");
-});
-//follow a user route
-router.post("/:id/follow", (req, res) => {
-    res.send("following a user");
-});
-//unfollow a user 
-router.delete("/:id/unfollow", (req, res) => {
-    res.send("router to unfollow user");
-});
+router.delete("/api/:id", user_js_1.deleteUser);
 exports.default = router;

@@ -107,7 +107,7 @@ Make sure you are in root directory before pushing to github.
 # GROUP MEMBERS  
 - John Oluwole 
 - Ushahemba Shir 
-- Stanly Omeje 
+- Stanley Omeje 
 - Folashade Ayanda 
 -Tunbosun Omojola 
 
