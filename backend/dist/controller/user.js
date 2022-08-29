@@ -15,6 +15,11 @@ async function signupUser(req, res, next) {
     const id = (0, uuid_1.v4)();
     try {
         const validationResult = utils_1.registerSchema.validate(req.body, utils_1.options);
+        if (validationResult.error) {
+            return res.status(400).json({
+                Error: validationResult.error.details[0].message
+            });
+        }
         const duplicatEmail = await user_1.UserInstance.findOne({ where: { email: req.body.email } });
         if (duplicatEmail) {
             return res.status(409).json({
@@ -53,7 +58,7 @@ async function signupUser(req, res, next) {
         console.log(err);
         res.status(500).json({
             msg: 'failed to register',
-            route: '/register'
+            route: '/signup'
         });
     }
 }
@@ -95,12 +100,15 @@ async function loginUser(req, res, next) {
 exports.loginUser = loginUser;
 /* GET users listing. */
 async function logoutUser(req, res, next) {
-    res.json({
-        msg: "logout user route"
-    });
+    if (req.cookies.token) {
+        res.cookie('token', '', {
+            httpOnly: true,
+            maxAge: 1
+        });
+        res.redirect('/users/logout');
+    }
 }
 exports.logoutUser = logoutUser;
-;
 /* GET ALL USERS users listing. */
 async function getUsers(req, res, next) {
     try {
@@ -144,7 +152,7 @@ exports.getSingleUser = getSingleUser;
 async function updateUser(req, res, next) {
     try {
         const { id } = req.params;
-        const { username, fullname, email, password, phone, gender } = req.body;
+        const { username, fullname, email, password, profilePicture, phone, gender } = req.body;
         const validationResult = utils_1.updateSchema.validate(req.body, utils_1.options);
         if (validationResult.error) {
             return res.status(400).json({ Error: validationResult.error.details[0].message });
@@ -159,8 +167,9 @@ async function updateUser(req, res, next) {
             fullname,
             email,
             password,
+            profilePicture,
             phone,
-            gender
+            gender,
         });
         res.status(200).json({
             msg: "you have successfully updated your account"

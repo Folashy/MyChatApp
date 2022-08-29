@@ -19,6 +19,10 @@ exports.registerSchema = joi_1.default.object().keys({
     fullname: joi_1.default.string().required(),
     email: joi_1.default.string().trim().lowercase().required(),
     phone: joi_1.default.string().required(),
+<<<<<<< HEAD
+    gender: joi_1.default.string(),
+=======
+>>>>>>> develop
     password: joi_1.default.string().regex(/^[a-zA-Z0-9]{3,30}$/),
     confirm_password: joi_1.default.ref("password")
 }).with('password', 'confirm_password');
