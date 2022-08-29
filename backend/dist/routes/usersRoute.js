@@ -10,12 +10,12 @@ const user_js_1 = require("../controller/user.js");
 router.get('/about', (req, res) => {
     res.send("about");
 });
-router.get("/api", user_js_1.getUsers);
-router.get("/api/id", user_js_1.getSingleUser);
-router.patch("/api/:id", user_js_1.updateUser);
-router.delete("/api/id", user_js_1.deleteUser);
+router.get("/", user_js_1.getUsers);
+router.get("/:id", user_js_1.getSingleUser);
+router.patch("/:id", user_js_1.updateUser);
+router.delete("/:id", user_js_1.deleteUser);
 //get friends
-router.get('/friends/:id', (req, res) => {
+router.get('/friends/:userId', (req, res) => {
     res.send("get all frends");
 });
 //follow a user route

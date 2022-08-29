@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction} from 'express';
 import {v4 as uuidv4} from 'uuid'
 import { UserInstance } from '../models/user';
-import { registerSchema,options,loginSchema,generateToken, updateSchema} from '../utils/utils';
+import { registerSchema,options,loginSchema,generateToken} from '../utils/utils';
 var router = express.Router();
 import bcrypt from 'bcryptjs'
 
@@ -11,6 +11,11 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
     const id = uuidv4()
     try{ 
         const validationResult = registerSchema.validate(req.body,options)
+        if( validationResult.error){
+            return res.status(400).json({
+               Error:validationResult.error.details[0].message
+            })
+         }
         const duplicatEmail = await UserInstance.findOne({where:{email:req.body.email}})
         if(duplicatEmail){
          return res.status(409).json({
@@ -93,39 +98,10 @@ export async function getSingleUser (req: Request, res: Response, next: NextFunc
 
 /* UPDATE users listing. */
 export async function updateUser (req: Request, res: Response, next: NextFunction) {
-    try{
-        const {id} = req.params;
-        const {username, fullname, email, password, phone, gender} = req.body;
-        const validationResult = updateSchema.validate(req.body, options);
-        if (validationResult.error){
-            return res.status(400).json({Error: validationResult.error.details[0].message});
-        }
-        const record = await UserInstance.findOne({where: {id}});
-        if(!record){
-            return res.status(404).json({error: "User not found"})
-        }
-        const updateRecord = await record.update({
-            
-            id, 
-            username,
-            fullname,
-            email,
-            password,
-            phone,
-            gender
-        });
-        res.status(200).json({
-            msg: "you have successfully updated your account"
-        });
-    }
-     catch (error) {
-        console.log(error)
-        res.status(500).json({
-            msg: "failed to update",
-            route: "/users/api/:id",
-        })
-     }
-}
+    res.json({
+        msg: "update user route"
+    });
+};
 
 /* DELETE users listing. */
 export async function deleteUser (req: Request, res: Response, next: NextFunction) {
@@ -142,3 +118,9 @@ export async function follow (req: Request, res: Response, next: NextFunction) {
 };
 
 
+//unfollow a user
+export async function unfollow (req: Request, res: Response, next: NextFunction) {
+    res.json({
+        msg: "delete user route"
+    });
+};

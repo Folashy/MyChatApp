@@ -5,7 +5,9 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import db from './config/db.config';
 import indexRouter from './routes/index';
-import usersRouter from './routes/users';
+import usersRouter from './routes/usersRoute';
+import authRouter from './routes/autho'
+import postRouter from './routes/postRoute'
 
 db.sync().then(() => {
   console.log('Database connected on port 5000');
@@ -22,7 +24,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/authos',authRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/posts',postRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

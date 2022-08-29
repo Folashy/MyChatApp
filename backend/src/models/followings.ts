@@ -15,7 +15,6 @@ FollowingInstance.init({
     },
     UserId:{
         type:DataTypes.STRING,
-     
     },
   
     

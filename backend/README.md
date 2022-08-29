@@ -12,7 +12,7 @@ Open your project root directory. `cd backend` then run the
 The BackEnd is structured using the Model - Controller pattern. 
 
 
-**DB** - MongoDB (_for local development till the zccore API endpoints for data manipulation have been finished_)
+**DB** - SQLITE (_for local development till the zccore API endpoints for data manipulation have been finished_)
 
 **Cloud storage** - Cloudinary (_for local development till zccore provides an API for file storage_)
 
@@ -62,18 +62,44 @@ Based on all the features we've planned out for our project
   - company (String )
   - phone (Boolean)
   - location (String)
-
+- *Post Model*
+- *Message Model*
+- *Followings Model*
+- *Followers Model*
+- *Conversation Model*
 
 ### **Routes** 
-- **User CRUDE / ROUTES** (copy, paste, cut, delete, rename, star, pin)
-  - *sign up user: `POST` `http://localhost:5000/users/signup` 
-  - *get all users*: `GET` `http://localhost:5000/users/api`
-  - *get single user*: `GET` `http://localhost:5000/users/api/id`
-  - *update user*: `PATCH` `http://localhost:5000/users/api/id`
-  - *login user*: `POST` `http://localhost:5000/users/login`
-  - *logout*: `POST` `http://localhost:5000/users/logout`
-  - *index route*: `GET` `http://localhost:5000`
 
+- **Autho ROUTES** 
+(signUp,login,logout)
+
+ -  - *sign up user*: `POST` `http://localhost:5000/api/authos/register` 
+ - *login user*: `POST` `http://localhost:5000/api/authos/login`
+  
+  - *logout*: `GET` `http://localhost:5000/api/authos/logout/:id`
+
+
+- **Users ROUTES** (copy, paste, cut, delete, rename, star, pin)
+ 
+  - *update user*: `PATCH` `http://localhost:5000/api/users/:id`
+  - *delete user*: `PATCH` `http://localhost:5000/api/users/:id`
+
+  - *get all users*: `GET` `http://localhost:5000/api/users`
+ - *get single user*: `GET` `http://localhost:5000/api/users/:id`
+  - *get friends*: `GET` `http://localhost:5000/api/users/friends/:userId`
+
+   - *follow a user*: `POST` `http://localhost:5000/api/users/:id/follow`
+     - *unfollow a user*: `DELETE` `http://localhost:5000/api/users/:id/unfollow`
+
+- **POSTS ROUTES** 
+ - *Create Post*: `POST` `http://localhost:5000/api/posts`
+
+  - *Update Post*: `PATCH` `http://localhost:5000/api/posts/:id`
+  - *Delete Post*: `DELETE` `http://localhost:5000/api/posts/:id`
+
+  - *Get all user's Post*: `GET` `http://localhost:5000/api/posts/profile/:username`
+   - *Get timeline Posts*: `GET` `http://localhost:5000/api/posts/timeline/:userId`
+   - *Get a single Post*: `GET` `http://localhost:5000/api/posts/:id`
 REST API
 
 read
