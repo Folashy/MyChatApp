@@ -53,34 +53,6 @@ UserInstance.init({
             }
         }
     },
-    profilePicture: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    coverPicture: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    isAdmin: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-        allowNull: false
-    },
-    desc: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    city: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    from: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
-    relationship: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
-    },
     password: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,

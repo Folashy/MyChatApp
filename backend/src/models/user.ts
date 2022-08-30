@@ -7,7 +7,6 @@ interface UsersAttributes {
     username:string;
     fullname:string;
     email:string;
-<<<<<<< HEAD
     password: string;
     profilePicture: string;
     coverPicture: string;
@@ -16,16 +15,6 @@ interface UsersAttributes {
     city: string;
     from: string;
     relationship: string;
-=======
-    password:string;
-    profilePicture:string;
-    coverPicture: string;
-    isAdmin: boolean;
-    desc:string;
-    city:string;
-    from:string;
-    relationship:string;
->>>>>>> develop
     phone:string;
     gender:string;
 }
@@ -38,22 +27,13 @@ UserInstance.init({
         primaryKey: true,
         allowNull: false
     },
-<<<<<<< HEAD
+
     username: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notNull: {
                 msg: 'username is required'
-=======
-    username:{
-        type:DataTypes.STRING,
-        allowNull:false,
-        unique:true,
-        validate:{
-            notNull:{
-                msg:'username is required'
->>>>>>> develop
             },
             notEmpty: {
                 msg: "please provide a username"
@@ -84,34 +64,6 @@ UserInstance.init({
                 msg: 'please provide a valid Email'
             }
         }
-    },
-    profilePicture: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    coverPicture: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    isAdmin: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-    desc: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    city: {
-        type: DataTypes.STRING,
-        allowNull: false 
-    },
-    from: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    relationship: {
-        type: DataTypes.STRING,
-        allowNull: false
     },
     password: {
         type:DataTypes.STRING,
