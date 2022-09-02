@@ -42,39 +42,41 @@ const Login = props => {
   }
 
   return (
-    <div className='form-container'>
+    <div className="form-container">
       <h1>
-        Account <span className='text-primary'>Login</span>
+        Account <span className="text-primary">Login</span>
       </h1>
       <form onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='email'>Email Address</label>
+        <div className="form-group">
+          <label htmlFor="email">Email Address</label>
           <input
-            type='email'
-            name='email'
+            type="email"
+            name="email"
             value={email}
             onChange={onChange}
             required
           />
         </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
-            type='password'
-            name='password'
+            type="password"
+            name="password"
             value={password}
             onChange={onChange}
             required
           />
         </div>
         <input
-          type='submit'
-          value='Login'
-          className='btn btn-primary btn-block'
+          type="submit"
+          value="Login"
+          className="btn btn-primary btn-block"
         />
       </form>
+      Don't have Account?{" "}
+      <a href="http://localhost:3000/register">Signup</a>
     </div>
-  )
+  );
 }
 
 export default Login

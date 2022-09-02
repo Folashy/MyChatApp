@@ -13,12 +13,14 @@ const index_1 = __importDefault(require("./routes/index"));
 const usersRoute_1 = __importDefault(require("./routes/usersRoute"));
 const autho_1 = __importDefault(require("./routes/autho"));
 const postRoute_1 = __importDefault(require("./routes/postRoute"));
+const cors_1 = __importDefault(require("cors"));
 db_config_1.default.sync().then(() => {
     console.log('Database connected on port 5000');
 }).catch(err => {
     console.log(err);
 });
 var app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use((0, morgan_1.default)('dev'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));

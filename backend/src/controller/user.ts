@@ -85,8 +85,19 @@ export async function loginUser(req: Request, res: Response, next: NextFunction)
             })
         }
         if (validUser) {
+            res.cookie("token", token, {
+            maxAge: 1000 * 60 * 60 * 24,
+            sameSite: "strict",
+            httpOnly: true,
+        });
+        res.cookie("id",id, {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+          sameSite: "strict",
+          httpOnly: true,
+        })
             res.json({
-                msg: "login user route"
+                token: token,
+                msg: "login Successful"
             })
         }
         }catch (err) {
