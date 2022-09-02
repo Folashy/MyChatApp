@@ -15,13 +15,11 @@ async function auth(req, res, next) {
                 Error: 'Kindly sign in as a user'
             });
         }
-        //const token = authorization?.slice(7, authorization.length) as string
         const token = authorization;
         let verified = jsonwebtoken_1.default.verify(token, secret);
-        //console.log("token : ", token," ","secret : ",secret)
         if (!verified) {
             return res.status(401).json({
-                Error: 'User not verified, you cant access this route'
+                Error: 'User not verified. Access Denied'
             });
         }
         const { id } = verified;

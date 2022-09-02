@@ -58,8 +58,8 @@ const AuthState = props => {
         payload: res.data,
       
       })
-      console.log("user registered")
-      // loadUser()
+      // console.log("user registered")
+      loadUser()
     } catch (err) {
       dispatch({
         type: REGISTER_FAIL,
@@ -76,13 +76,13 @@ const AuthState = props => {
       }
     }
     try {
-      const res = await axios.post('/api/auth', formData, config)
+      const res = await axios.post("api/authos/login", formData, config);
 
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
       })
-
+      console.log("login successful")
       loadUser()
     } catch (err) {
       dispatch({

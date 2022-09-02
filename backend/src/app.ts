@@ -6,8 +6,10 @@ import logger from 'morgan';
 import db from './config/db.config';
 import indexRouter from './routes/index';
 import usersRouter from './routes/usersRoute';
-import authRouter from './routes/autho'
-import postRouter from './routes/postRoute'
+import authRouter from './routes/autho';
+import postRouter from './routes/postRoute';
+import cors from 'cors';
+
 
 db.sync().then(() => {
   console.log('Database connected on port 5000');
@@ -16,7 +18,7 @@ db.sync().then(() => {
 });
 
 var app = express();
-
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -36,16 +36,7 @@ const Register = props => {
     fullname,
     email,
     password,
-    confirm_password,
-    profilePicture,
-    coverPicture,
-    desc,
-    city,
-    from,
-    relationship,
-    phone,
-    gender
-
+    confirm_password
   } = user
 
   const onChange = e => setUser({...user, [e.target.name]: e.target.value})
@@ -142,6 +133,8 @@ const Register = props => {
           className="btn btn-primary btn-block"
         />
       </form>
+      Already have an Account?{" "}
+      <a href="http://localhost:3000/login">Login</a>
     </div>
   );
 }
