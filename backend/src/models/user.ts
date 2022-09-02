@@ -119,9 +119,8 @@ UserInstance.init({
     },
     gender:{
         type:DataTypes.STRING,  
-        allowNull:false,
-        
-        
+        allowNull: false,
+        defaultValue: '' 
     },
 },{
     sequelize:db,

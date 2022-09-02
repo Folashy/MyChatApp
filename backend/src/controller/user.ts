@@ -8,25 +8,20 @@ import { ValidationError } from 'sequelize/types';
 
 /* GET users listing. */
 export async function signupUser (req: Request, res: Response, next: NextFunction) {
-
     const id = uuidv4()
     try{ 
-
         const validationResult = registerSchema.validate(req.body,options)
-
         if(validationResult.error){
             return res.status(400).json({
                 Error:validationResult.error.details[0].message
             })
         }
-
         const duplicatEmail = await UserInstance.findOne({where:{email:req.body.email}})
         if(duplicatEmail){
          return res.status(409).json({
             msg:"Email is used, please change email"
          })  
         }
-
         const username = await UserInstance.findOne({where:{username:req.body.username}})
         if(username){
          return res.status(409).json({
@@ -36,8 +31,6 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
         
        const passwordHash = await bcrypt.hash(req.body.password,8)
        const record = await UserInstance.create({ 
-
-
           id:id,
           username:req.body.username,
           fullname:req.body.fullname,
@@ -53,7 +46,6 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
           phone:req.body.phone,
           gender:req.body.gender
 
-
         })
         
        res.status(201).json({
@@ -62,7 +54,6 @@ export async function signupUser (req: Request, res: Response, next: NextFunctio
        })
     }catch(err){
         console.log(err);
-        
        res.status(500).json({
         
         msg:'failed to register',
@@ -159,48 +150,10 @@ export async function getSingleUser(req: Request, res: Response, next: NextFunct
 
 /* UPDATE users listing. */
 export async function updateUser (req: Request, res: Response, next: NextFunction) {
-<<<<<<< HEAD
     res.json({
         msg: "update user route"
     });
 };
-=======
-    try{
-        const {id} = req.params;
-        const {username, fullname, email, password, profilePicture, phone, gender} = req.body;
-        const validationResult = updateSchema.validate(req.body, options);
-        if (validationResult.error){
-            return res.status(400).json({Error: validationResult.error.details[0].message});
-        }
-        const record = await UserInstance.findOne({where: {id}});
-        if(!record){
-            return res.status(404).json({error: "User not found"})
-        }
-        const updateRecord = await record.update({
-            
-            id, 
-            username,
-            fullname,
-            email,
-            password,
-            profilePicture,
-            phone,
-            gender,
-            
-        });
-        res.status(200).json({
-            msg: "you have successfully updated your account"
-        });
-    }
-     catch (error) {
-        console.log(error)
-        res.status(500).json({
-            msg: "failed to update",
-            route: "/users/api/:id",
-        })
-     }
-}
->>>>>>> develop
 
 /* DELETE users listing. */
 export async function deleteUser(req: Request, res: Response, next: NextFunction) {

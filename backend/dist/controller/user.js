@@ -156,6 +156,7 @@ async function updateUser(req, res, next) {
 }
 exports.updateUser = updateUser;
 ;
+/* DELETE users listing. */
 async function deleteUser(req, res, next) {
     try {
         const { id } = req.params;

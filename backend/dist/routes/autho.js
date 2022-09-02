@@ -9,4 +9,5 @@ const user_1 = require("../controller/user");
 /* GET home page. */
 router.post('/register', user_1.signupUser);
 router.post('/login', user_1.loginUser);
+// styts
 exports.default = router;

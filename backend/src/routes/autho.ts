@@ -7,6 +7,6 @@ router.post('/register',signupUser);
 
 router.post('/login',loginUser)
 
+// styts
 
-
-export default router;
+export default router; 

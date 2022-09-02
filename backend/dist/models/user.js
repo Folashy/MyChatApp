@@ -107,6 +107,7 @@ UserInstance.init({
     gender: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
+        defaultValue: ''
     },
 }, {
     sequelize: db_config_1.default,
