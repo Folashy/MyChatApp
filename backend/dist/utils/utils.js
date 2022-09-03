@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateSchema = exports.options = exports.generateToken = exports.postSchema = exports.loginSchema = exports.registerSchema = void 0;
+exports.updateSchema = exports.options = exports.generateToken = exports.messageSchema = exports.postSchema = exports.loginSchema = exports.registerSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.registerSchema = joi_1.default.object().keys({
@@ -20,6 +20,11 @@ exports.loginSchema = joi_1.default.object().keys({
 exports.postSchema = joi_1.default.object().keys({
     img: joi_1.default.string(),
     desc: joi_1.default.string()
+});
+exports.messageSchema = joi_1.default.object().keys({
+    conversationId: joi_1.default.string().required(),
+    sender: joi_1.default.string().required(),
+    text: joi_1.default.string()
 });
 //Generate Token
 const generateToken = (user) => {

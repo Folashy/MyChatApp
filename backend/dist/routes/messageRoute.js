@@ -9,9 +9,9 @@ const messageController_1 = require("../controller/messageController");
 // create message
 router.post('/', messageController_1.postMessage);
 //get message
-router.get('/', messageController_1.createMessage);
+router.get('/', messageController_1.getMessage);
 // update message
-router.patch('/id', messageController_1.updateMessage);
+router.patch('/:id', messageController_1.updateMessage);
 // delete message
-router.delete("/id", messageController_1.deleteMessage);
+router.delete("/:id", messageController_1.deleteMessage);
 exports.default = router;
