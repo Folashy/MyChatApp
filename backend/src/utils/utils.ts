@@ -20,6 +20,13 @@ export const postSchema = Joi.object().keys({
     img:Joi.string(),
     desc:Joi.string()
 })
+
+export const messageSchema = Joi.object().keys({
+   conversationId:Joi.string().required(),
+   sender:Joi.string().required(),
+   text:Joi.string()
+})
+
 //Generate Token
 export const generateToken=(user:{[key:string]:unknown}):unknown=>{
   const pass = `${process.env.JWT_SECRET}` as string

@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction} from 'express';
 var router = express.Router();
 import {
-    createMessage,
+    getMessage,
     postMessage,
     updateMessage,
     deleteMessage,
@@ -11,12 +11,12 @@ import {
 router.post('/', postMessage)
 
 //get message
-router.get('/', createMessage);
+router.get('/', getMessage);
 
 // update message
-router.patch('/id',updateMessage)
+router.patch('/:id',updateMessage)
 
 // delete message
-router.delete("/id",deleteMessage)
+router.delete("/:id",deleteMessage)
 
 export default router;
