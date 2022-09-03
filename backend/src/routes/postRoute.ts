@@ -13,31 +13,29 @@ import {
 /* GET home page. */
 
 //create a post
-router.post('/',(req,res)=>{
-    res.send("Welcome to create post")
-});
-
+router.post('/create', createPost);
 
 //update a post
-router.put('/update',createPost)
-
-//delete a post
-router.delete('/update',deletePost)
-
-//like or dislike a post
-router.post("/:id/like",(req,res)=>{
-    res.send("dislike")
-})
+router.put('/update/:id', updatePost)
 
 //get single post
-router.get("/:id",getSinglePost)
+router.get("/sg/:id",getSinglePost)
+
+//get all user post
+router.get("/", getAllUsersPost)
+
+
+
+//delete a post
+router.delete('/delete/:id',deletePost)
 
 //get timeline Posts
 router.get("/timeline/:userId",getTimelinePost)
 
-//get all post for one user
-router.get("/profile/:username",(req,res)=>{
-    res.send("all User's post")
+
+//like or dislike a post
+router.post("/:id/like",(req,res)=>{
+    res.send("dislike")
 })
 
 
