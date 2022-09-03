@@ -41,9 +41,4 @@ router.get("/profile/:username",(req,res)=>{
 })
 
 
-
-
-
-
-
 export default router;

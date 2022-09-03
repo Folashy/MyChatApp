@@ -6,8 +6,9 @@ import logger from 'morgan';
 import db from './config/db.config';
 import indexRouter from './routes/index';
 import usersRouter from './routes/usersRoute';
-import authRouter from './routes/autho';
+import authRouter from './routes/auth';
 import postRouter from './routes/postRoute';
+import messageRouter from './routes/messageRoute';
 import cors from 'cors';
 
 
@@ -28,7 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/authos',authRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/posts',postRouter)
+app.use('/api/posts', postRouter)
+app.use('/api/messages',messageRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

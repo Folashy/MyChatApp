@@ -1,6 +1,6 @@
 import express, {Request, Response, NextFunction} from 'express';
 var router = express.Router();
-import {signupUser,loginUser,logoutUser} from '../controller/user'
+import {signupUser,loginUser,logoutUser} from '../controller/userController'
 
 /* GET home page. */
 router.post('/register',signupUser);

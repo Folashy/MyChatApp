@@ -9,7 +9,7 @@ import {
   getSingleUser,
   updateUser,
   deleteUser
-} from '../controller/user.js'
+} from '../controller/userController.js'
 
 /* GET users listing. */
 router.get('/about', (req,res)=>{
