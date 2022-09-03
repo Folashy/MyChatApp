@@ -8,23 +8,19 @@ var router = express_1.default.Router();
 const postController_1 = require("../controller/postController");
 /* GET home page. */
 //create a post
-router.post('/', (req, res) => {
-    res.send("Welcome to create post");
-});
+router.post('/create', postController_1.createPost);
 //update a post
-router.put('/update', postController_1.createPost);
+router.put('/update/:id', postController_1.updatePost);
+//get single post
+router.get("/sg/:id", postController_1.getSinglePost);
+//get all user post
+router.get("/", postController_1.getAllUsersPost);
 //delete a post
-router.delete('/update', postController_1.deletePost);
+router.delete('/delete/:id', postController_1.deletePost);
+//get timeline Posts
+router.get("/timeline/:userId", postController_1.getTimelinePost);
 //like or dislike a post
 router.post("/:id/like", (req, res) => {
     res.send("dislike");
-});
-//get single post
-router.get("/:id", postController_1.getSinglePost);
-//get timeline Posts
-router.get("/timeline/:userId", postController_1.getTimelinePost);
-//get all post for one user
-router.get("/profile/:username", (req, res) => {
-    res.send("all User's post");
 });
 exports.default = router;

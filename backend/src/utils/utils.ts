@@ -17,8 +17,8 @@ export const loginSchema = Joi.object().keys({
 })
 
 export const postSchema = Joi.object().keys({
-    img:Joi.string(),
-    desc:Joi.string()
+    img:Joi.string().required(),
+    desc:Joi.string().required(),
 })
 
 export const messageSchema = Joi.object().keys({
@@ -43,10 +43,6 @@ export const options ={
 } 
 
 export const updateSchema = Joi.object().keys({
-    username:Joi.string().lowercase(),
-    fullname:Joi.string().lowercase(),
-    email:Joi.string(),
-    phone:Joi.string(),
-    password:Joi.string()
-    
+    desc:Joi.string,
+    img:Joi.string 
 });

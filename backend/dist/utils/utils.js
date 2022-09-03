@@ -18,8 +18,8 @@ exports.loginSchema = joi_1.default.object().keys({
     password: joi_1.default.string().regex(/^[a-zA-Z0-9]{3,30}$/),
 });
 exports.postSchema = joi_1.default.object().keys({
-    img: joi_1.default.string(),
-    desc: joi_1.default.string()
+    img: joi_1.default.string().required(),
+    desc: joi_1.default.string().required(),
 });
 exports.messageSchema = joi_1.default.object().keys({
     conversationId: joi_1.default.string().required(),
@@ -41,9 +41,6 @@ exports.options = {
     }
 };
 exports.updateSchema = joi_1.default.object().keys({
-    username: joi_1.default.string().lowercase(),
-    fullname: joi_1.default.string().lowercase(),
-    email: joi_1.default.string(),
-    phone: joi_1.default.string(),
-    password: joi_1.default.string()
+    desc: joi_1.default.string,
+    img: joi_1.default.string
 });
