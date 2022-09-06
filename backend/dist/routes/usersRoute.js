@@ -4,26 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-var router = express_1.default.Router();
-const userController_js_1 = require("../controller/userController.js");
-/* GET users listing. */
-router.get('/about', (req, res) => {
-    res.send("about");
-});
-router.get("/", userController_js_1.getUsers);
-router.get("/:id", userController_js_1.getSingleUser);
-router.patch("/:id", userController_js_1.updateUser);
-router.delete("/:id", userController_js_1.deleteUser);
-//get friends
-router.get('/friends/:userId', (req, res) => {
-    res.send("get all frends");
-});
-//follow a user route
-router.post("/:id/follow", (req, res) => {
-    res.send("following a user");
-});
-//unfollow a user 
-router.delete("/:id/unfollow", (req, res) => {
-    res.send("router to unfollow user");
-});
+const usersController_1 = require("../controllers/usersController");
+const router = express_1.default.Router();
+router.post("/register", usersController_1.register);
+router.post("/login", usersController_1.login);
+router.post("/setavatar/:id", usersController_1.setAvatar);
+router.get("/allusers/:id", usersController_1.getAllUsers);
 exports.default = router;

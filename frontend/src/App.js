@@ -1,45 +1,22 @@
-import React, {Fragment} from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import setAuthToken from './utils/setAuthToken'
-import PrivateRoute from './components/routing/PrivateRoute'
-import Navbar from './components/layouts/Navbar'
-import Alerts from './components/layouts/Alerts'
-import Home from './components/pages/Home'
-import About from './components/pages/About'
-import Register from './components/auth/Register'
-import Login from './components/auth/Login'
-import ContactState from './context/contact/ContactState'
-import AuthState from './context/auth/AuthState'
-import AlertState from './context/alert/AlertState'
-import './App.css'
+import React from 'react';
+import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import Register from './pages/Register'
+import './App.css';
+import Login from './pages/Login';
+import Chart from './pages/Chart';
+import SetAvatar from './components/setAvatar';
 
-if (localStorage.tokem) {
-  setAuthToken(localStorage.token)
-}
-
-const App = () => {
+function App() {
   return (
-    <AuthState>
-      <ContactState>
-        <Router>
-          <Fragment>
-            <Navbar />
-            <div className='container'>
-              <AlertState>
-                <Alerts />
-                <Switch>
-                  <PrivateRoute exact path='/' component={Home} />
-                  <Route exact path='/about' component={About} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/login' component={Login} />
-                </Switch>
-              </AlertState>
-            </div>
-          </Fragment>
-        </Router>
-      </ContactState>
-    </AuthState>
-  )
+   <BrowserRouter>
+    <Routes>
+      <Route path='/register' element={<Register />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/setavatar' element={<SetAvatar />} />
+      <Route path='/' element={<Chart />} />
+    </Routes>
+   </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -1,51 +1,83 @@
+import 'dotenv/config'
 import createError from 'http-errors';
-import express, {Request, Response, NextFunction } from 'express';
-import path from 'path';
+import express from "express"
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import db from './config/db.config';
-import indexRouter from './routes/index';
-import usersRouter from './routes/usersRoute';
-import authRouter from './routes/auth';
-import postRouter from './routes/postRoute';
-import messageRouter from './routes/messageRoute';
-import cors from 'cors';
+import http from "node:http"
+import cors from "cors"
+import { Server } from "socket.io"
+import usersRoute from "./routes/usersRoute"
+import messageRoute from "./routes/messageRoute"
+import db from './config/db.config'
+import { any } from 'joi';
+
+const app = express()
+app.use(logger('dev'))
+app.use(cookieParser());
+app.use(cors());
+
 
 
 db.sync().then(() => {
-  console.log('Database connected on port 5000');
-}).catch(err => {
-  console.log(err)
-});
+    console.log('Database connected on port 5000');
+  }).catch(err => {
+    console.log(err)
+  });
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: false }));
 
-var app = express();
-app.use(cors())
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/api/authos',authRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/posts', postRouter)
-app.use('/api/messages',messageRouter)
+app.use("/api/auth",usersRoute)
+app.use("/api/messages", messageRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
+  });
+  
+  
+//const server = http.createServer(app)
+
+
+// const io = new Server(server,{
+//     cors:{
+//         origin:"http://localhost:3000",
+//         methods:["GET","POST"]
+//     }
+// })
+
+// io.on("connection",(socket)=>{
+//     console.log("User connected: ",socket.id)
+//     socket.emit('message','welcome to DecaCon')
+    
+
+    
+//     socket.on("disconnect",()=>{
+//         console.log("User Left the chat",socket.id)
+//     })
+// })
+const server = app.listen(process.env.PORT,()=>{
+    console.log(`server started on port ${process.env.PORT}`)
+})
+const io = new Server(server,{
+    cors:{
+        origin:"http://localhost:3000",
+        credentials:true
+    }
+})
+
+
+ var onlineUsers = new Map()
+
+ io.on("connection", (socket) => {
+    var chatSocket = socket;
+    socket.on("add-user", (userId) => {
+      onlineUsers.set(userId, socket.id);
+    });
+    socket.on("send-msg", (data) => {
+        const sendUserSocket = onlineUsers.get(data.to);
+        if (sendUserSocket) {
+          socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+        }
+      });
 });
-
-// error handler
-app.use(function(err: any, req: Request, res: Response, next: NextFunction) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-export default app;
+    

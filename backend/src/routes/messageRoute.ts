@@ -1,22 +1,10 @@
-import express, {Request, Response, NextFunction} from 'express';
-var router = express.Router();
-import {
-    getMessage,
-    postMessage,
-    updateMessage,
-    deleteMessage,
-} from '../controller/messageController'
+import express from "express"
+import { addMessage,getMessages } from "../controllers/messageController";
+const router = express.Router();
 
-// create message
-router.post('/', postMessage)
 
-//get message
-router.get('/', getMessage);
+router.post("/addmsg/", addMessage);
+router.post("/getmsg/",getMessages);
 
-// update message
-router.patch('/:id',updateMessage)
 
-// delete message
-router.delete("/:id",deleteMessage)
-
-export default router;
+export default router
