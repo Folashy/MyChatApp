@@ -4,14 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-var router = express_1.default.Router();
-const messageController_1 = require("../controller/messageController");
-// create message
-router.post('/', messageController_1.postMessage);
-//get message
-router.get('/', messageController_1.getMessage);
-// update message
-router.patch('/:id', messageController_1.updateMessage);
-// delete message
-router.delete("/:id", messageController_1.deleteMessage);
+const messageController_1 = require("../controllers/messageController");
+const router = express_1.default.Router();
+router.post("/addmsg/", messageController_1.addMessage);
+router.post("/getmsg/", messageController_1.getMessages);
 exports.default = router;
