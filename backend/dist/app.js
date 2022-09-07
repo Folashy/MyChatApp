@@ -12,6 +12,7 @@ const cors_1 = __importDefault(require("cors"));
 const socket_io_1 = require("socket.io");
 const usersRoute_1 = __importDefault(require("./routes/usersRoute"));
 const messageRoute_1 = __importDefault(require("./routes/messageRoute"));
+const postRoute_1 = __importDefault(require("./routes/postRoute"));
 const db_config_1 = __importDefault(require("./config/db.config"));
 const app = (0, express_1.default)();
 app.use((0, morgan_1.default)('dev'));
@@ -26,24 +27,11 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use("/api/auth", usersRoute_1.default);
 app.use("/api/messages", messageRoute_1.default);
+app.use("/api/posts", postRoute_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next((0, http_errors_1.default)(404));
 });
-//const server = http.createServer(app)
-// const io = new Server(server,{
-//     cors:{
-//         origin:"http://localhost:3000",
-//         methods:["GET","POST"]
-//     }
-// })
-// io.on("connection",(socket)=>{
-//     console.log("User connected: ",socket.id)
-//     socket.emit('message','welcome to DecaCon')
-//     socket.on("disconnect",()=>{
-//         console.log("User Left the chat",socket.id)
-//     })
-// })
 const server = app.listen(process.env.PORT, () => {
     console.log(`server started on port ${process.env.PORT}`);
 });

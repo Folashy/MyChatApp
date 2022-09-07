@@ -8,6 +8,7 @@ import cors from "cors"
 import { Server } from "socket.io"
 import usersRoute from "./routes/usersRoute"
 import messageRoute from "./routes/messageRoute"
+import postRoute  from "./routes/postRoute"
 import db from './config/db.config'
 import { any } from 'joi';
 
@@ -28,6 +29,7 @@ db.sync().then(() => {
 
 app.use("/api/auth",usersRoute)
 app.use("/api/messages", messageRoute);
+app.use("/api/posts",postRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,26 +37,7 @@ app.use(function(req, res, next) {
   });
   
   
-//const server = http.createServer(app)
 
-
-// const io = new Server(server,{
-//     cors:{
-//         origin:"http://localhost:3000",
-//         methods:["GET","POST"]
-//     }
-// })
-
-// io.on("connection",(socket)=>{
-//     console.log("User connected: ",socket.id)
-//     socket.emit('message','welcome to DecaCon')
-    
-
-    
-//     socket.on("disconnect",()=>{
-//         console.log("User Left the chat",socket.id)
-//     })
-// })
 const server = app.listen(process.env.PORT,()=>{
     console.log(`server started on port ${process.env.PORT}`)
 })
